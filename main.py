@@ -4,8 +4,11 @@ import re
 from datetime import datetime
 from collections import deque
 from fuzzywuzzy import fuzz
+import time
+from pyrogram.handlers import MessageHandler
+import _thread
 
-app = Client("******")
+app = Client("+8618615710956")
 chat_id = "noADhym"
 pool = deque(maxlen=10)
 
@@ -39,7 +42,7 @@ def channel_check(client, message):
             return True
     return False
 
-@app.on_message()
+# @app.on_message()
 def my_handler(client, message):
     print(message.text)
     print(message.caption)
@@ -52,5 +55,7 @@ def my_handler(client, message):
         message.forward(chat_id)
         return
 
-
+handler = MessageHandler(my_handler)
+app.add_handler(handler)
+# _thread.start_new_thread(main,())
 app.run()
